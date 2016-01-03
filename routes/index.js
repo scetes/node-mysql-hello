@@ -3,33 +3,25 @@ var router = express.Router();
 var mysql  = require('mysql');
 var resultsjson = [{name: 'paul'}];
 
+var mysqlconnection = mysql.createConnection({
+    host     : process.env.MYSQL_HOST || 'localhost', //'104.196.25.135', //'192.168.99.100',
+    user     : process.env.MYSQL_USER_NAME || 'root',
+    password : process.env.MYSQL_USER_PWD || 'admin',
+    database : process.env.MYSQL_DB || 'hellodb'
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* GET API static. */
 router.get('/api', function (req, res, next) {
   res.render('index', { title: resultsjson[0].name });
 });
 
+/* GET data from sql db. */
 router.get('/api/sql', function (req, res, next) {
-/*
-
-
-    myquery.on('result', function(row) {
-        acontact += row.name;
-        console.log('name in func: ' + acontact);
-
-    });
-
-*/
-
-    var mysqlconnection = mysql.createConnection({
-        host     : '192.168.99.100',
-        user     : 'root',
-        password : 'admin',
-        database : 'hellodb'
-    });
 
     mysqlconnection.connect();
 

@@ -1,0 +1,37 @@
+{
+
+  "builders": [ 
+      {
+        "type": "docker",
+        "name": "dockernodeweb",
+        "image": "ubuntu",
+        "commit": true
+      }
+
+
+  ],
+
+  "provisioners": [
+
+    {
+      "type": "shell",
+      "only": ["dockernodeweb"],
+      "scripts": ["updates.sh"]
+    }
+
+  ],
+
+  "post-processors": [
+    
+      {
+        "type": "docker-tag",
+        "only": ["dockernodeweb"],
+        "repository": "scetes/node-mysql-hello",
+        "force": "true"
+      }
+     
+
+  ]
+
+
+}
