@@ -16,6 +16,8 @@
       spec: 
         containers: 
           - 
+            image: "scetes/node-mysql-hello:latest"
+            name: "node-simple"
             command: 
               - "nodejs"
               - "/node-mysql-hello/bin/www"
@@ -31,9 +33,7 @@
                 value: "hellodb"
               -
                 name: "MYSQL_HOST"
-                value: "10.163.255.210"
-            image: "scetes/node-mysql-hello:latest"
-            name: "node-simple"
+                value: "10.163.252.198"
             ports: 
               - 
                 containerPort: 3000
