@@ -22,12 +22,16 @@ router.get('/api', function (req, res, next) {
 });
 
 /* GET data from sql db. */
-router.get('/api/sql', function (req, res, next) {
+router.get('/api/contacts/:contact_id', function (req, res, next) {
 
 
     pool.getConnection(function(err, connection) {
         // Use the connection
-        connection.query( 'SELECT name from contact', function(err, rows) {
+        var sql = "SELECT * FROM ?? WHERE ?? = ?";
+        var inserts = ['contact', 'contact_id', req.params.contact_id];
+        sql = mysql.format(sql, inserts);
+
+        connection.query( sql, function(err, rows) {
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query" + err});
             } else {
